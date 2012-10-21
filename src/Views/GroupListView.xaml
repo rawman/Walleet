@@ -33,7 +33,7 @@
                         <DataTemplate>
                             <StackPanel cal:Message.Attach="[Event Tap] = [Action ShowGroup($dataContext)]">
                               <TextBlock 
-                                Text="{Binding name}" FontSize="40"></TextBlock>
+                                Text="{Binding name}" FontSize="{StaticResource PhoneFontSizeExtraLarge}"></TextBlock>
                             </StackPanel>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
@@ -41,6 +41,5 @@
             </StackPanel>
         </Grid>
     </Grid>
-    
- 
+
 </phone:PhoneApplicationPage>

@@ -23,10 +23,10 @@ namespace Walleet.ViewModels
             _serviceClient = serviceClient;
             _navigationService = navigationService;
             
-            Groups = new ObservableCollection<group>();
+            Groups = new ObservableCollection<Group>();
         }
 
-        public ObservableCollection<group> Groups { get; set; } 
+        public ObservableCollection<Group> Groups { get; set; } 
 
         protected override void OnActivate()
         {
@@ -43,7 +43,7 @@ namespace Walleet.ViewModels
                                                                  }));
         }
 
-        public void ShowGroup(group g)
+        public void ShowGroup(Group g)
         {
             _navigationService.UriFor<GroupDetailsViewModel>()
                 .WithParam(x => x.GroupId, g.id).Navigate();

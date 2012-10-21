@@ -19,6 +19,8 @@ namespace Walleet {
             container.PerRequest<LoginViewModel>();
             container.PerRequest<GroupListViewModel>();
             container.PerRequest<GroupDetailsViewModel>();
+            container.PerRequest<AddDebtViewModel>();
+
             container.Singleton<RegistrationService>();
             container.Singleton<WalleetServiceClient>();
 

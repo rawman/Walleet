@@ -1,11 +1,12 @@
 ﻿<phone:PhoneApplicationPage 
-    x:Class="Walleet.Views.GroupDetailsView"
+    x:Class="Walleet.Views.AddDebtView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:cal="http://www.caliburnproject.org"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -22,27 +23,20 @@
 
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock x:Name="PageTitle" Text="members" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+            <TextBlock x:Name="PageTitle" Text="new debt" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <StackPanel>
-                <ListBox ItemsSource="{Binding Members}">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel>
-                                <TextBlock Text="{Binding name}" 
-                                           Margin="0,12,0,0"
-                                           FontSize="{StaticResource PhoneFontSizeLarge}">
-                                </TextBlock>
-                                <TextBlock Text="{Binding amount}" 
-                                           Foreground="Gray">
-                                </TextBlock>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
+                <TextBlock Text="giver" Margin="12,12,0,0"></TextBlock>
+                <toolkit:ListPicker ItemsSource="{Binding Members}"
+                                    SelectedItem="{Binding Giver, Mode=TwoWay}"></toolkit:ListPicker>
+                <TextBlock Text="taker" Margin="12,12,0,0"></TextBlock>
+                <toolkit:ListPicker ItemsSource="{Binding Members}"
+                                    SelectedItem="{Binding Taker, Mode=TwoWay}"></toolkit:ListPicker>
+                <TextBlock Text="amount" Margin="12,12,0,0"></TextBlock>
+                <TextBox Name="Amount" InputScope="CurrencyAmount"></TextBox>
             </StackPanel>
         </Grid>
     </Grid>
@@ -52,10 +46,10 @@
             IsVisible="True" 
             IsMenuEnabled="True">
             <shell:ApplicationBar.Buttons>
-                <cal:AppBarButton IconUri="/Images\appbar.add.rest.png"
-                                  Text="add debt" Message="AddDebt"/>
+                <cal:AppBarButton IconUri="/Images\appbar.save.rest.png"
+                                  Text="save" Message="Save"/>
             </shell:ApplicationBar.Buttons>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
-    
+
 </phone:PhoneApplicationPage>

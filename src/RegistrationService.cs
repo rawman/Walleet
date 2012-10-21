@@ -22,7 +22,7 @@ namespace Walleet
 
         public RegistrationService()
         {
-            _rest = new RestTemplate(new Uri("http://10.12.216.102:8888"));
+            _rest = new RestTemplate(Settings.Host);
             _rest.MessageConverters.Add(new NJsonHttpMessageConverter());
         }
 

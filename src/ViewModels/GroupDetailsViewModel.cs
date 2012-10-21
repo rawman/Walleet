@@ -15,18 +15,20 @@ namespace Walleet.ViewModels
 {
     public class GroupDetailsViewModel : Screen
     {
-        private WalleetServiceClient _serviceClient;
+        private readonly WalleetServiceClient _serviceClient;
+        private readonly INavigationService _navigationService;
 
-        public GroupDetailsViewModel(WalleetServiceClient walleetService)
+        public GroupDetailsViewModel(WalleetServiceClient walleetService, INavigationService navigationService)
         {
             _serviceClient = walleetService;
-            Members = new ObservableCollection<member>();
+            _navigationService = navigationService;
+            Members = new ObservableCollection<Member>();
         }
 
         public int GroupId { get; set; }
 
 
-        public ObservableCollection<member> Members { get; set; } 
+        public ObservableCollection<Member> Members { get; set; } 
 
 
         protected override void OnActivate()
@@ -35,11 +37,18 @@ namespace Walleet.ViewModels
 
             _serviceClient.GetGroupInfo(GroupId, g => Execute.OnUIThread(() =>
             {
+                Members.Clear();
                 foreach (var mem in g.members)
                 {
                     Members.Add(mem);
                 }
             }));
+        }
+
+        public void AddDebt()
+        {
+            _navigationService.UriFor<AddDebtViewModel>()
+                .WithParam(x => x.GroupId, GroupId).Navigate();
         }
     }
 }
