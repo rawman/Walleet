@@ -77,6 +77,21 @@ namespace Walleet
             });
         }
 
+        public void GetFeed(DateTime from, Action<FeedItem[],DateTime?> calback)
+        {
+            var entity = CreateEntity();
+
+            _rest.ExchangeAsync<GetFeedResponce>("/api/v1/person/feed.json?time=" + from.ToString("yyyy-MM-ddTHH:mm:ssZ"), HttpMethod.GET, entity, r =>
+            {
+                if (r.Error == null)
+                {
+                    calback(r.Response.Body.items, r.Response.Body.next_timestamp);
+                }
+                else
+                    throw new Exception("get groups failed", r.Error);
+            });
+        }
+
         public void AddDebt(Debt debt, Action calback)
         {
             var entity = CreateEntity(debt);
@@ -110,6 +125,12 @@ namespace Walleet
     public class GetGroupInfoResponce
     {
         public Group group { get; set; }
+    }
+
+    public class GetFeedResponce
+    {
+        public FeedItem[] items { get; set; }
+        public DateTime? next_timestamp { get; set; }
     }
     
     public class GroupItem
@@ -156,5 +177,23 @@ namespace Walleet
             taker_ids = takerId.ToString();
             this.amount = amount.ToString();
         }
+    }
+
+    public class Currency
+    {
+        public int decimal_precision { get; set; }
+        public string decimal_separator { get; set; }
+        public int id { get; set; }
+        public string symbol { get; set; }
+        public string thousands_separator { get; set; }
+    }
+
+    public class FeedItem
+    {
+        public double amount { get; set; }
+        public DateTime Date { get; set; }
+        public string feed_type { get; set; }
+        public Currency currency { get; set; }
+        public string text { get; set; }
     }
 }

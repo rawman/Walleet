@@ -13,10 +13,10 @@ using Caliburn.Micro;
 
 namespace Walleet.ViewModels
 {
-    public class GroupListViewModel : Screen
+    public class GroupListViewModel : Screen, IPage
     {
-        private INavigationService _navigationService;
-        private WalleetServiceClient _serviceClient;
+        private readonly INavigationService _navigationService;
+        private readonly WalleetServiceClient _serviceClient;
 
         public GroupListViewModel(WalleetServiceClient serviceClient, INavigationService navigationService)
         {
@@ -24,6 +24,13 @@ namespace Walleet.ViewModels
             _navigationService = navigationService;
             
             Groups = new ObservableCollection<Group>();
+
+            DisplayName = "groups";
+        }
+
+        public int Order
+        {
+            get { return 1; }
         }
 
         public ObservableCollection<Group> Groups { get; set; } 

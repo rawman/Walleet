@@ -30,7 +30,7 @@ namespace Walleet.ViewModels
         {
             if (e.Exception == null)
             {
-                _navigationService.UriFor<GroupListViewModel>().Navigate();
+                _navigationService.UriFor<MainPanoramaPageViewModel>().Navigate();
             }
             else
             {

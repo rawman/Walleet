@@ -1,4 +1,5 @@
-﻿using Walleet.ViewModels;
+﻿using System.Reflection;
+using Walleet.ViewModels;
 
 namespace Walleet {
     using System;
@@ -20,6 +21,8 @@ namespace Walleet {
             container.PerRequest<GroupListViewModel>();
             container.PerRequest<GroupDetailsViewModel>();
             container.PerRequest<AddDebtViewModel>();
+            container.PerRequest<MainPanoramaPageViewModel>();
+            container.AllTypesOf<IPage>(Assembly.GetExecutingAssembly());
 
             container.Singleton<RegistrationService>();
             container.Singleton<WalleetServiceClient>();

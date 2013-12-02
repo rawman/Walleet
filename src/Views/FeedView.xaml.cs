@@ -12,9 +12,9 @@ using System.Windows.Shapes;
 
 namespace Walleet.Views
 {
-    public partial class GroupListView : UserControl
+    public partial class FeedView : UserControl
     {
-        public GroupListView()
+        public FeedView()
         {
             InitializeComponent();
         }
